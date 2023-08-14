@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-import { HumanDuration } from '@backstage/types';
+import { durationToMilliseconds, HumanDuration } from '@backstage/types';
 import { Knex } from 'knex';
 import { DateTime } from 'luxon';
-import { durationToMs } from '../../../util/durationToMs';
 import { timestampToDateTime } from '../../conversion';
 import { DbRefreshStateRow } from '../../tables';
 
@@ -96,7 +95,7 @@ export async function getDeferredStitchableEntities(options: {
 }
 
 function nowPlus(knex: Knex, duration: HumanDuration): Knex.Raw {
-  const seconds = durationToMs(duration) / 1000;
+  const seconds = durationToMilliseconds(duration) / 1000;
   if (knex.client.config.client.includes('sqlite3')) {
     return knex.raw(`datetime('now', ?)`, [`${seconds} seconds`]);
   } else if (knex.client.config.client.includes('mysql')) {

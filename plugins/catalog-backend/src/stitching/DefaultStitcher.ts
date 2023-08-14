@@ -15,7 +15,7 @@
  */
 
 import { Config } from '@backstage/config';
-import { HumanDuration } from '@backstage/types';
+import { durationToMilliseconds, HumanDuration } from '@backstage/types';
 import { Knex } from 'knex';
 import splitToChunks from 'lodash/chunk';
 import { DateTime } from 'luxon';
@@ -25,7 +25,6 @@ import { markForStitching } from '../database/operations/stitcher/markForStitchi
 import { performStitching } from '../database/operations/stitcher/performStitching';
 import { DbRefreshStateRow } from '../database/tables';
 import { startTaskPipeline } from '../processing/TaskPipeline';
-import { durationToMs } from '../util/durationToMs';
 import { progressTracker } from './progressTracker';
 import {
   Stitcher,
@@ -125,7 +124,7 @@ export class DefaultStitcher implements Stitcher {
       const stopPipeline = startTaskPipeline<DeferredStitchItem>({
         lowWatermark: 2,
         highWatermark: 5,
-        pollingIntervalMs: durationToMs(pollingInterval),
+        pollingIntervalMs: durationToMilliseconds(pollingInterval),
         loadTasks: async count => {
           return await this.#getStitchableEntities(count, stitchTimeout);
         },
