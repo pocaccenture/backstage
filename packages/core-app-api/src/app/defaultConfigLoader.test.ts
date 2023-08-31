@@ -72,7 +72,12 @@ describe('defaultConfigLoader', () => {
     anyEnv.APP_CONFIG = [{ data: { my: 'config' }, context: 'a' }];
 
     await expect((defaultConfigLoader as any)('}')).rejects.toThrow(
-      'Failed to load runtime configuration, SyntaxError: Unexpected token } in JSON at position 0',
+      expect.objectContaining({
+        name: 'Error',
+        message: expect.stringMatching(
+          /^Failed to load runtime configuration, SyntaxError: Unexpected token (?:\)} in JSON at position 0|'\}', "}" is not valid JSON)$/,
+        ),
+      }),
     );
   });
 
