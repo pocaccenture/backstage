@@ -42,7 +42,7 @@ backend:
       ssl:
         require: true
         rejectUnauthorized: false
-
+#
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
@@ -85,11 +85,11 @@ auth:
       development:
         clientId: Iv1.f8d8e55c18881092
         clientSecret: 265cb23e920e7e08a4f1c2486006a00c0fc781c5
-    gitlab:
-      local:
-        clientId: 6ff71e3732a79bd443274c82ee24d3b8440228f51b39aaad01b7ed25c27ca8b8
-        clientSecret: 8400216bb7b7919a68d77d9da0a637c6e4ca4a1525a275076ad8e694b37c7a87
-        callbackUrl: http://backstage.yoyart.com.br/api/auth/callback/gitlab
+    #`gitlab:
+    #`  local:
+    #`    clientId: 6ff71e3732a79bd443274c82ee24d3b8440228f51b39aaad01b7ed25c27ca8b8
+    #`    clientSecret: 8400216bb7b7919a68d77d9da0a637c6e4ca4a1525a275076ad8e694b37c7a87
+    #`    callbackUrl: http://backstage.yoyart.com.br/api/auth/callback/gitlab
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
