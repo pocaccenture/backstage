@@ -14,20 +14,11 @@
  * limitations under the License.
  */
 
-import {
-  createPageExtension,
-  createPlugin,
-} from '@backstage/frontend-plugin-api';
 import React from 'react';
+import { SidebarItem } from '@backstage/core-components';
+import SaveIcon from '@material-ui/icons/Save';
 
-export const GraphiqlPage = createPageExtension({
-  id: 'graphiql.page',
-  defaultPath: '/graphiql',
-  component: () =>
-    import('@backstage/plugin-graphiql').then(({ Router }) => <Router />),
-});
-
-export const graphiqlPlugin = createPlugin({
-  id: 'graphiql',
-  extensions: [GraphiqlPage],
-});
+/** @public */
+export const ExampleSidebarItem = () => (
+  <SidebarItem text="Example" to="/example" icon={SaveIcon} />
+);
