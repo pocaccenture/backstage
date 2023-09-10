@@ -35,13 +35,21 @@ ECR_REPOSITORY_URL=$(terraform output ecr_repository_url) # Get the repository U
 
 
 
+# yarn build
+# yarn run v1.22.19
+# $ backstage-cli repo build --all
+# Building packages
+# Building apps
+# Loaded config from app-config.yaml, app-config.local.yaml
+
 
 
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 945314604561.dkr.ecr.us-east-1.amazonaws.com
 nvm current node -v
 nvm install 18.12.0
 nvm use 18.12.0
+docker buildx prune -f
 docker buildx build --platform linux/amd64 -t ic-poc-telefonica-repo:2.0.0 . -f ./packages/backend/Dockerfile
 docker tag ic-poc-telefonica-repo:2.0.0 945314604561.dkr.ecr.us-east-1.amazonaws.com/ic-poc-telefonica-repo:2.0.0
 docker push 945314604561.dkr.ecr.us-east-1.amazonaws.com/ic-poc-telefonica-repo:2.0.0
-echo "Docker image pushed to 945314604561.dkr.ecr.us-east-1.amazonaws.com/ic-poc-telefonica-repo/ic-telefonica-backstage:2.0.0"
+echo "Docker image pushed to 945314604561.dkr.ecr.us-east-1.amazonaws.com/ic-poc-telefonica-repo:2.0.0"
